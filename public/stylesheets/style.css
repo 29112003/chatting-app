@@ -1,0 +1,32 @@
+*{
+margin: 0%;
+padding: 0%;
+box-sizing: border-box;
+}
+html,body{
+height: 100%;
+width: 100%;
+}
+
+textarea{
+    scrollbar-width: thin;
+    scrollbar-color: #4A5568 #EDF2F7;
+    overflow-y: auto;
+}
+
+textarea::-webkit-scrollbar{
+    width: 2px;
+    display: hidden;
+}
+textarea::-webkit-scrollbar-track{
+    background-color: #EDF2F7;
+}
+textarea::-webkit-scrollbar-thumb{
+    background-color: #4A5568;
+    border-radius: 4px;
+}
+textarea::-webkit-scrollbar-thumb:hover{
+    background-color: #2D3748;
+}
+
+
