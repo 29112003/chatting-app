@@ -36,3 +36,32 @@ socket.on("message",function(data){
                     messageBox.innerHTML = cutter;
 })
 
+var overlay = document.querySelector(".overlay");
+var resetName = document.querySelector(".resetName");
+resetName.addEventListener("click", function(e){
+    overlay.classList.toggle("hidden");
+})
+var nameChangingInput = document.querySelector(".nameChangingInput")
+var nameChangeSubmit = document.querySelector(".nameChangeSubmit")
+var username = document.querySelector(".username")
+
+nameChangingInput.addEventListener("input", function(){
+    if(nameChangingInput.value.length > 1){
+        nameChangingInput.value = nameChangingInput.value.replace(/ /g,"_")
+    }
+    else{
+        nameChangingInput.value = nameChangingInput.value.trim();
+    }
+})
+
+nameChangeSubmit.addEventListener("click", function(e){
+    if(nameChangingInput.value.length > 0){
+        // console.log(nameChangingInput.value)
+        username.textContent = nameChangingInput.value;
+        socket.emit("name", nameChangingInput.value);
+        nameChangingInput.value = ""
+        overlay.classList.toggle("hidden");
+        // console.log("hello")
+    }
+
+})

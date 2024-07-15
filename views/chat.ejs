@@ -10,6 +10,13 @@
 <body>
 
     <main class="bg-red-400 flex items-center justify-center w-screen h-screen">
+        <div class="overlay h-[100vh] w-[100%] absolute top-0 left-0  bg-red-900 flex  justify-center items-center">
+            <div class="enterYouName bg-pink-500 px-3 py-5 rounded-md flex gap-4 flex-col justify-center ">
+                <h4 class="text-xl"  >Enter you name</h4>
+                <input type="text" class="nameChangingInput rounded-md px-3" placeholder="enter you name">
+                <button class="nameChangeSubmit rounded-md bg-blue-300 w-1/2 px-2 py-1  " >sumit</button>
+            </div>
+        </div>
         <div class="chat-box-container w-1/2 rounded-md overflow-hidden  ">
             <div class="header w-full py-5 px-4 bg-[#FECACA]">
                 <div  class="flex justify-between  items-center ">
@@ -18,8 +25,9 @@
                         <h5>live now.</h5>
                     </div>
                     
-                    <div class="headerright flex items-center ">
-                        <h1  class="bg-red-500 px-4 py-2 rounded-md text-white text-xl">username</h1>
+                    <div class="headerright gap-4 flex items-center ">
+                        <button class="resetName bg-red-500 px-4 py-2 rounded-md text-white text-xl" >reset</button>
+                        <h1  class="username text-black font-bold  text-xl">username</h1>
                         
                     </div>
 
