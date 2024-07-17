@@ -2,9 +2,6 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 
-// soketIo
-
-
 const socketIo = require('socket.io');
 const http = require('http');
 const server = http.createServer(app);
@@ -19,22 +16,29 @@ app.set("view engine", "ejs");
 const router = require("./routes/index");
 app.use(express.static(path.join(__dirname,"public")))
 
-let userId = [];
+let userId = {};
 let socketId = [];
 
 io.on("connection",function(socket){
     socket.on("name", function(name){
-        userId.push(name)
+        userId[socket.id] = name;
         socketId.push(socket.id)
-        console.log(userId, socketId)
+        io.emit("people",socketId.length)
     })
-    socket.on("disconnect", function(name){
-        userId.splice(userId.indexOf(name),1)
-        socketId.splice(socketId.indexOf(socket.id),1)
-        console.log(userId, socketId)
+    socket.on("disconnect", function(){
+        delete userId[socket.id];
+        const index = socketId.indexOf(socket.id);
+        if(index !== -1){
+            socketId.splice(index,1);
+        }
+        io.emit("people", socketId.length);
     })
     socket.on("message", function(data){
-        io.emit("message",data);
+        const messageData = {
+            username : userId[socket.id],
+            message:data
+        };
+        io.emit("message", messageData)
     })
 })
 

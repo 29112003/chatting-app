@@ -20,20 +20,28 @@ input.addEventListener("keydown", function(e){
         input.value = "";
     }
 })
-
-
+var totalCount = document.querySelector("#people");
+// console.log(totalCount.textContent);
+socket.on("people", function(people){
+    totalCount.textContent = people;
+})
+socket.on("name",function(name){
+    console.log(name);
+    console.log("kaise ho")
+})
 var cutter = "";
 socket.on("message",function(data){
-    const messageWithBreak = data.replace(/\n/g, "<br>");
-    cutter += `<div class="flex justify-end " >
-                        <div class="rounded-l-lg p-3 bg-blue-500 rounded-br-lg text-white">
-                            <p class="text-sm">
-                                ${messageWithBreak}
-                            </p>
-                        </div>
-                    </div>`
+    const messageWithBreak = data.message.replace(/\n/g, "<br>");
+    cutter += `
+<div class="flex flex-col items-end mb-2 space-y-1">
+    <div class=" p-3 bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg rounded-l-lg  rounded-br-lg">
+        <div class="text-xs font-semibold text-gray-200">${data.username}</div>
+        <p class="text-xl mt-1  text-white  whitespace-pre-line">${messageWithBreak}</p>
+    </div>
+</div>`
                     
                     messageBox.innerHTML = cutter;
+                    
 })
 
 var overlay = document.querySelector(".overlay");
@@ -56,12 +64,10 @@ nameChangingInput.addEventListener("input", function(){
 
 nameChangeSubmit.addEventListener("click", function(e){
     if(nameChangingInput.value.length > 0){
-        // console.log(nameChangingInput.value)
         username.textContent = nameChangingInput.value;
         socket.emit("name", nameChangingInput.value);
         nameChangingInput.value = ""
         overlay.classList.toggle("hidden");
-        // console.log("hello")
     }
 
 })
