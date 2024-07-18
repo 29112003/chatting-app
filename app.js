@@ -33,10 +33,18 @@ io.on("connection",function(socket){
         }
         io.emit("people", socketId.length);
     })
+    socket.on('typing',     function(data){
+        let  username = `${userId[data]} is typing...`;
+        socket.broadcast.emit('typing', username);
+    })
+    socket.on('stop typing',     function(data){
+        socket.broadcast.emit('stop typing');
+    })
     socket.on("message", function(data){
         const messageData = {
             username : userId[socket.id],
-            message:data
+            message:data,
+            id : socket.id  
         };
         io.emit("message", messageData)
     })

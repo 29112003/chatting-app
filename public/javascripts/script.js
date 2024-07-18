@@ -7,6 +7,20 @@ document.querySelector(".send").addEventListener("click", function(e){
     input.value = "";
 })
 
+input.addEventListener('input', () => {
+    socket.emit('typing',  `${socket.id}`);
+});
+
+input.addEventListener('blur', () => {
+    socket.emit('stop typing');
+});
+socket.on('typing', (data) => {
+    document.querySelector('.typing-status').innerText =  data;
+});
+socket.on('stop typing', () => {
+    document.querySelector('.typing-status').innerText = '';
+});
+
 input.addEventListener("keydown", function(e){
 
     if( e.key === "Enter" &&  e.shiftKey) {
@@ -16,8 +30,12 @@ input.addEventListener("keydown", function(e){
         input.selectionEnd = cursorPosition+1;
     }else if(e.key === "Enter"){
         e.preventDefault();
-        socket.emit("message", input.value)
-        input.value = "";
+        if(input.value.length > 0){
+            socket.emit("message", input.value)
+            input.value = "";
+            socket.emit('stop typing');//for is typing
+        }else{
+        }
     }
 })
 var totalCount = document.querySelector("#people");
@@ -33,15 +51,15 @@ var cutter = "";
 socket.on("message",function(data){
     const messageWithBreak = data.message.replace(/\n/g, "<br>");
     cutter += `
-<div class="flex flex-col items-end mb-2 space-y-1">
-    <div class=" p-3 bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg rounded-l-lg  rounded-br-lg">
+<div class="flex ${data.id === socket.id ? 'justify-end' : 'justify-start'} mb-2 space-y-1">
+    <div class=" p-3 bg-gradient-to-r ${data.id === socket.id ? 'rounded-l-lg  rounded-br-lg' : 'rounded-lg rounded-tl-none'} from-blue-400 to-blue-600 shadow-lg">
         <div class="text-xs font-semibold text-gray-200">${data.username}</div>
         <p class="text-xl mt-1  text-white  whitespace-pre-line">${messageWithBreak}</p>
     </div>
 </div>`
                     
                     messageBox.innerHTML = cutter;
-                    
+                    document.querySelector(".message-container").scrollTop = document.querySelector(".message-container").scrollHeight;
 })
 
 var overlay = document.querySelector(".overlay");

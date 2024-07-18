@@ -10,52 +10,39 @@
 <body>
 
     <main class="bg-red-400 flex items-center justify-center w-screen h-screen">
-        <div class="overlay h-[100vh] w-[100%] absolute top-0 left-0  bg-red-900 flex  justify-center items-center">
+        <div class="overlay h-[100vh] w-[100%] absolute top-0 left-0 bg-red-900 flex justify-center items-center">
             <div class="enterYouName bg-pink-500 px-3 py-5 rounded-md flex gap-4 flex-col justify-center ">
-                <h4 class="text-xl"  >Enter you name</h4>
-                <input type="text" class="nameChangingInput rounded-md px-3" placeholder="enter you name">
-                <button class="nameChangeSubmit rounded-md bg-blue-300 w-1/2 px-2 py-1  " >submit</button>
+                <h4 class="text-xl">Enter your name</h4>
+                <input type="text" class="nameChangingInput rounded-md px-3" placeholder="Enter your name">
+                <button class="nameChangeSubmit rounded-md bg-blue-300 w-1/2 px-2 py-1">Submit</button>
             </div>
         </div>
-        <div class="chat-box-container w-1/2 rounded-md overflow-hidden  ">
+        <div class="chat-box-container w-full md:w-2/3 lg:w-1/2 rounded-lg overflow-hidden rounded-tl-none">
             <div class="header w-full py-5 px-4 bg-[#FECACA]">
-                <div  class="flex justify-between  items-center ">
-                    <div class="headerleft flex gap-3 items-center ">
-                        <h1 class="font-bold text-2xl" >chatting app</h1>
-                        <h5> <span id="people"></span> live now.</h5>
-                        <div class="typing-status">
-                            
-                        </div>
+                <div class="flex justify-between items-center">
+                    <div class="headerleft flex gap-3 items-center">
+                        <h1 class="font-bold text-2xl">Chatting App</h1>
+                        <h5><span id="people"></span> live now.</h5>
+                        <div class="typing-status"></div>
                     </div>
-                    
-                    <div class="headerright gap-4 flex items-center ">
-                        <button class="resetName bg-red-500 px-4 py-2 rounded-md text-white text-xl" >reset</button>
-                        <h1  class="username text-black font-bold  text-xl">username</h1>
-                        
+                    <div class="headerright gap-4 flex items-center">
+                        <button class="resetName bg-red-500 px-4 py-2 rounded-md text-white text-xl">Reset</button>
+                        <h1 class="username text-black font-bold text-xl">Username</h1>
                     </div>
-
                 </div>
             </div>
-            <div class="message-container p-10 h-[500px]   overflow-y-auto" style="background-image: url('https://images.unsplash.com/photo-1494475673543-6a6a27143fc8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');background-size: cover;
-    background-position: center;">
-                <div class="message flex flex-col space-y-3">
-                    
-                </div>
+            <div class="message-container p-10 h-[500px] overflow-y-auto" style="background-image: url('https://images.unsplash.com/photo-1494475673543-6a6a27143fc8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');background-size: cover; background-position: center;">
+                <div class="message flex flex-col space-y-3"></div>
             </div>
             <div class="lower w-full py-4 px-2 flex justify-between gap-2 bg-red-200">
-                <textarea name="" id="" rows="1" class="input w-full resize-none rounded-full outline-none px-3 py-2 text-xl srollbar-thin scroller-gray-300 scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-800 "></textarea>
-
-                <button class="send bg-blue-500 text-white  px-6 rounded-full  hover:bg-blue-600">Send</button>
+                <textarea name="" id="" rows="1" class="input w-full resize-none rounded-full outline-none px-3 py-2 text-xl srollbar-thin scroller-gray-300 scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-800"></textarea>
+                <button class="send bg-blue-500 text-white px-6 rounded-full hover:bg-blue-600">Send</button>
             </div>
         </div>
     </main>
 
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
-
     <script src="/javascripts/script.js"></script>
-    
-        
 
-    
 </body>
 </html>
